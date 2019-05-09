@@ -9,8 +9,9 @@ shinyUI(fluidPage( #create the overall page
   titlePanel("BLAST Data"),
   
   # Some helpful information
-  helpText("This application creates a plot to show difference between",
-           "iris species.  Please use the radio box below to choose a trait",
+  helpText("This application creates a plot to how different traits might",
+           "affect the sequence length vs score relationship.",
+           "Please use the radio box below to choose a trait",
            "for plotting"),
   
   # Sidebar with a radio box to input which trait will be plotted
