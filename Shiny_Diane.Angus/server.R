@@ -1,10 +1,18 @@
 library(shiny)
 library(ggplot2)
 
+<<<<<<< HEAD
+
+library(tidyverse)
+library(tidyverse)
+plant_worm <- read_tsv("plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
+worm_plant <- read_tsv("worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
+=======
 library(tidyverse)
 library(stringr)
 plant_worm <- read_tsv("~/Downloads/plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
 worm_plant <- read_tsv("~/Downloads/worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
+>>>>>>> eeee0e3108879092d140510bc30b817498d10509
 colnames(plant_worm) <- c("query_id",
                           "subject_id",
                           "pct_ident",
@@ -30,6 +38,10 @@ colnames(worm_plant) <- c("query_id",
                           "se",
                           "E",
                           "Score")
+<<<<<<< HEAD
+
+=======
+>>>>>>> eeee0e3108879092d140510bc30b817498d10509
 plant_worm_best <- plant_worm %>%
   arrange(query_id, E, desc(Score)) %>%
   filter(!duplicated(query_id))
@@ -37,6 +49,18 @@ worm_plant_best <- worm_plant %>%
   arrange(query_id, E, desc(Score)) %>%
   filter(!duplicated(query_id))
 
+<<<<<<< HEAD
+
+plant_worm.blast <- plant_worm_best %>%
+  select(len, pct_ident, E)
+worm_plant.blast <- worm_plant_best %>%
+  select(len, pct_ident, E)
+
+
+
+
+=======
+>>>>>>> eeee0e3108879092d140510bc30b817498d10509
 # Define server logic required to draw a boxplot
 shinyServer(function(input, output) {
   
