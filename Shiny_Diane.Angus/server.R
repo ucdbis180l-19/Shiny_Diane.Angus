@@ -50,12 +50,12 @@ shinyServer(function(input, output) {
   output$Plot <- renderPlot({
     
     # set up the plot
-    pl <- ggplot(data = plant_worm_best,
+    pl <- ggplot(data = plant_worm_best,filter("pct_ident>0"),
                  #Use aes_string below so that input$trait is interpreted
                  #correctly.  The other variables need to be quoted
                  aes_string(x="Score",
-                            y=input$len,
-                            fill="pct_ident"
+                            y="len",
+                            color="pct_ident"
                  )
     )
     
