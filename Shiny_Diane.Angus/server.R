@@ -1,18 +1,13 @@
 library(shiny)
 library(ggplot2)
 
-<<<<<<< HEAD
 
 library(tidyverse)
-library(tidyverse)
+library(stringr)
 plant_worm <- read_tsv("plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
 worm_plant <- read_tsv("worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
-=======
-library(tidyverse)
-library(stringr)
-plant_worm <- read_tsv("~/Downloads/plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
-worm_plant <- read_tsv("~/Downloads/worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
->>>>>>> eeee0e3108879092d140510bc30b817498d10509
+
+
 colnames(plant_worm) <- c("query_id",
                           "subject_id",
                           "pct_ident",
