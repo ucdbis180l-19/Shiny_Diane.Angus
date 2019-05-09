@@ -1,14 +1,41 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(ggplot2)
+
+library(tidyverse)
+library(stringr)
+plant_worm <- read_tsv("~/Downloads/plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
+worm_plant <- read_tsv("~/Downloads/worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
+colnames(plant_worm) <- c("query_id",
+                          "subject_id",
+                          "pct_ident",
+                          "len",
+                          "mis",
+                          "gaps",
+                          "qb",
+                          "qe",
+                          "sb",
+                          "se",
+                          "E",
+                          "Score")
+
+colnames(worm_plant) <- c("query_id",
+                          "subject_id",
+                          "pct_ident",
+                          "len",
+                          "mis",
+                          "gaps",
+                          "qb",
+                          "qe",
+                          "sb",
+                          "se",
+                          "E",
+                          "Score")
+plant_worm_best <- plant_worm %>%
+  arrange(query_id, E, desc(Score)) %>%
+  filter(!duplicated(query_id))
+worm_plant_best <- worm_plant %>%
+  arrange(query_id, E, desc(Score)) %>%
+  filter(!duplicated(query_id))
 
 # Define server logic required to draw a boxplot
 shinyServer(function(input, output) {
@@ -20,19 +47,19 @@ shinyServer(function(input, output) {
   #     when inputs change
   #  2) Its output type is a plot
   
-  output$boxPlot <- renderPlot({
+  output$Plot <- renderPlot({
     
     # set up the plot
-    pl <- ggplot(data = iris,
+    pl <- ggplot(data = plant_worm_best,
                  #Use aes_string below so that input$trait is interpreted
                  #correctly.  The other variables need to be quoted
-                 aes_string(x="Species",
-                            y=input$trait,
-                            fill="Species"
+                 aes_string(x="Score",
+                            y=input$len,
+                            fill="pct_ident"
                  )
     )
     
     # draw the boxplot for the specified trait
-    pl + geom_boxplot()
+    pl + geom_point()
   })
 })
