@@ -3,6 +3,11 @@ library(ggplot2)
 
 
 library(tidyverse)
+
+library(stringr)
+
+
+
 plant_worm <- read_tsv("plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
 worm_plant <- read_tsv("worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
 
@@ -28,9 +33,6 @@ plant_worm_best <- plant_worm %>%
 
 
 
-
-
-
 # Define server logic required to draw a boxplot
 shinyServer(function(input, output) {
   
@@ -44,12 +46,15 @@ shinyServer(function(input, output) {
   output$Plot <- renderPlot({
     
     # set up the plot
+
+
     pl <- ggplot(data=plant_worm_best,
                  #Use aes_string below so that input$trait is interpreted
                  #correctly.  The other variables need to be quoted
                  aes_string(x="Score",
                             y="length",
              color=input$trait
+
                  )
     )
     
