@@ -55,7 +55,7 @@ shinyServer(function(input, output) {
                             y="length",
              color=input$trait
 
-                 )
+                 ) 
     )
     
     # draw the boxplot for the specified trait
