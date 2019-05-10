@@ -6,7 +6,9 @@ library(tidyverse)
 
 library(stringr)
 
-
+install.packages('rsconnect')
+library(rsconnect)
+deployApp("~/Assignments/Shiny_Diane.Angus")
 
 plant_worm <- read_tsv("plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
 worm_plant <- read_tsv("worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
@@ -62,3 +64,5 @@ shinyServer(function(input, output) {
     pl + geom_point()
   })
 })
+
+

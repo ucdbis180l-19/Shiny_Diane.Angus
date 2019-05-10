@@ -1,39 +1,24 @@
 ```{r}
 library(tidyverse)
 library(stringr)
-plant_worm <- read_tsv("~/Downloads/plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
-worm_plant <- read_tsv("~/Downloads/worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
+plant_worm <- read_tsv("plant_vs_worm.blastout_v2.1.gz",col_names=FALSE)
+worm_plant <- read_tsv("worm_vs_plant.blastout_v2.1.gz",col_names=FALSE)
 colnames(plant_worm) <- c("query_id",
-                        "subject_id",
-                        "pct_ident",
-                        "len",
-                        "mis",
-                        "gaps",
-                        "qb",
-                        "qe",
-                        "sb",
-                        "se",
-                        "E",
-                        "Score")
-                        
-colnames(worm_plant) <- c("query_id",
-                        "subject_id",
-                        "pct_ident",
-                        "len",
-                        "mis",
-                        "gaps",
-                        "qb",
-                        "qe",
-                        "sb",
-                        "se",
-                        "E",
-                        "Score")
+                          "subject_id",
+                          "percent.identity",
+                          "length",
+                          "mismatch",
+                          "gaps",
+                          "qb",
+                          "qe",
+                          "sb",
+                          "se",
+                          "E.value",
+                          "Score")
+
+
+
 plant_worm_best <- plant_worm %>%
-    arrange(query_id, E, desc(Score)) %>%
-    filter(!duplicated(query_id))
-worm_plant_best <- worm_plant %>%
-    arrange(query_id, E, desc(Score)) %>%
-    filter(!duplicated(query_id))
-
+  arrange(query_id, E.value,desc(Score)) %>%
+  filter(!duplicated(query_id))
 ```
-
